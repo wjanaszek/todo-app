@@ -1,0 +1,59 @@
+{
+  "version": 2,
+  "projects": {
+    "api-todo": {
+      "root": "apps/api-todo",
+      "sourceRoot": "apps/api-todo/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/api-todo",
+            "main": "apps/api-todo/src/main.ts",
+            "tsConfig": "apps/api-todo/tsconfig.app.json",
+            "assets": ["apps/api-todo/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api-todo/src/environments/environment.ts",
+                  "with": "apps/api-todo/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api-todo:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/api-todo/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/api-todo"],
+          "options": {
+            "jestConfig": "apps/api-todo/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
+  },
+  "defaultProject": "api-todo"
+}
