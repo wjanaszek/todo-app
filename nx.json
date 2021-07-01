@@ -28,7 +28,19 @@
   },
   "projects": {
     "api-todo": {
-      "tags": []
+      "tags": ["type:api-application", "scope:api-todo"]
+    },
+    "api-todo-application": {
+      "tags": ["type:application", "scope:api-todo"]
+    },
+    "api-todo-domain": {
+      "tags": ["type:domain", "scope:api-todo"]
+    },
+    "api-todo-infrastructure": {
+      "tags": ["type:infrastructure", "scope:api-todo"]
+    },
+    "api-todo-shell": {
+      "tags": ["type:shell", "scope:api-todo"]
     }
   }
 }

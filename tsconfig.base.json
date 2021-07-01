@@ -14,7 +14,16 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@wjanaszek/api-todo/application": [
+        "libs/api-todo/application/src/index.ts"
+      ],
+      "@wjanaszek/api-todo/domain": ["libs/api-todo/domain/src/index.ts"],
+      "@wjanaszek/api-todo/infrastructure": [
+        "libs/api-todo/infrastructure/src/index.ts"
+      ],
+      "@wjanaszek/api-todo/shell": ["libs/api-todo/shell/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
