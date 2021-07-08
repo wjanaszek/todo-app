@@ -41,6 +41,18 @@
     },
     "api-todo-shell": {
       "tags": ["type:shell", "scope:api-todo"]
+    },
+    "api-todo-ui": {
+      "tags": ["type:ui", "scope:api-todo"]
+    },
+    "shared-application": {
+      "tags": ["type:application", "scope:shared"]
+    },
+    "shared-domain": {
+      "tags": ["type:domain", "scope:shared"]
+    },
+    "shared-infrastructure": {
+      "tags": ["type:infrastructure", "scope:shared"]
     }
   }
 }
