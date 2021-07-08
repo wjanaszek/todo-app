@@ -22,7 +22,13 @@
       "@wjanaszek/api-todo/infrastructure": [
         "libs/api-todo/infrastructure/src/index.ts"
       ],
-      "@wjanaszek/api-todo/shell": ["libs/api-todo/shell/src/index.ts"]
+      "@wjanaszek/api-todo/shell": ["libs/api-todo/shell/src/index.ts"],
+      "@wjanaszek/api-todo/ui": ["libs/api-todo/ui/src/index.ts"],
+      "@wjanaszek/shared/application": ["libs/shared/application/src/index.ts"],
+      "@wjanaszek/shared/domain": ["libs/shared/domain/src/index.ts"],
+      "@wjanaszek/shared/infrastructure": [
+        "libs/shared/infrastructure/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

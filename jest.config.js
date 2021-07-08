@@ -5,5 +5,9 @@ module.exports = {
     '<rootDir>/libs/api-todo/infrastructure',
     '<rootDir>/libs/api-todo/application',
     '<rootDir>/libs/api-todo/shell',
+    '<rootDir>/libs/shared/domain',
+    '<rootDir>/libs/api-todo/ui',
+    '<rootDir>/libs/shared/infrastructure',
+    '<rootDir>/libs/shared/application',
   ],
 };

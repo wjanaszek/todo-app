@@ -22,15 +22,27 @@
               },
               {
                 "sourceTag": "type:infrastructure",
-                "onlyDependOnLibsWithTags": ["type:domain"]
+                "onlyDependOnLibsWithTags": ["type:application", "type:domain"]
               },
               {
                 "sourceTag": "type:shell",
-                "onlyDependOnLibsWithTags": ["type:application", "type:infrastructure"]
+                "onlyDependOnLibsWithTags": [
+                  "type:application",
+                  "type:infrastructure"
+                ]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": [
+                  "type:application",
+                  "type:domain",
+                  "type:infrastructure",
+                  "type:ui"
+                ]
               },
               {
                 "sourceTag": "scope:api-todo",
-                "onlyDependOnLibsWithTags": ["scope:api-todo"]
+                "onlyDependOnLibsWithTags": ["scope:api-todo", "scope:shared"]
               }
             ]
           }
