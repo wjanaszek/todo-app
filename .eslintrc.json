@@ -37,6 +37,7 @@
                   "type:application",
                   "type:domain",
                   "type:infrastructure",
+                  "type:shell",
                   "type:ui"
                 ]
               },

@@ -1,12 +1,20 @@
 import { Module } from '@nestjs/common';
-import { ApiTodoInfrastructureModule, PsqlTodoEntity } from '@wjanaszek/api-todo/infrastructure';
+import { ApiTodoApplicationModule } from '@wjanaszek/api-todo/application';
+import {
+  ApiTodoInfrastructureModule,
+  PsqlTodoEntity,
+} from '@wjanaszek/api-todo/infrastructure';
 
 export const ApiTodo = {
   entities: [PsqlTodoEntity],
 };
 
 @Module({
-  imports: [ApiTodoInfrastructureModule],
-  exports: []
+  imports: [
+    ApiTodoApplicationModule.withInfrastructure([
+      ApiTodoInfrastructureModule.forRoot(),
+    ]),
+  ],
+  exports: [ApiTodoApplicationModule],
 })
 export class ApiTodoShellModule {}

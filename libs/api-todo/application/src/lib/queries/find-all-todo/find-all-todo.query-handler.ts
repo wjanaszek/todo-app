@@ -1,9 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import {
-  FindAllTodoQuery,
-  TodoRepository,
-} from '@wjanaszek/api-todo/application';
 import { TodoEntity } from '@wjanaszek/api-todo/domain';
+import { TodoRepository } from '../../todo.repository';
+import { FindAllTodoQuery } from './find-all-todo.query';
 
 @QueryHandler(FindAllTodoQuery)
 export class FindAllTodoQueryHandler

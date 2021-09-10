@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ApiTodoInfrastructureModule } from '@wjanaszek/api-todo/infrastructure';
+import { ApiTodoShellModule } from '@wjanaszek/api-todo/shell';
 import { RestApiTodoController } from './rest-api-todo.controller';
 
 @Module({
-  imports: [ApiTodoInfrastructureModule.forRoot()],
+  imports: [ApiTodoShellModule],
   controllers: [RestApiTodoController],
 })
 export class ApiTodoUiModule {}
