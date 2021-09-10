@@ -1,17 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import {
-  CreateTodoCommand,
-  CreateTodoWriteModel,
-  DeleteTodoCommand,
-  FindAllTodoQuery,
-  FindTodoByIdQuery,
-  TodoApplicationService,
-  TodoReadModel,
-  UpdateTodoCommand,
-  UpdateTodoWriteModel,
-} from '@wjanaszek/api-todo/application';
 import { TodoUid } from '@wjanaszek/api-todo/domain';
+import { CreateTodoCommand } from './commands/create/create-todo.command';
+import { DeleteTodoCommand } from './commands/delete/delete-todo.command';
+import { UpdateTodoCommand } from './commands/update/update-todo.command';
+import { FindAllTodoQuery } from './queries/find-all-todo/find-all-todo.query';
+import { FindTodoByIdQuery } from './queries/find-todo-by-id/find-todo-by-id.query';
+import { TodoReadModel } from './read-models/todo.read-model';
+import { TodoApplicationService } from './todo.application-service';
+import { CreateTodoWriteModel } from './write-models/create-todo.write-model';
+import { UpdateTodoWriteModel } from './write-models/update-todo.write-model';
 
 @Injectable()
 export class TodoApplicationServiceImplementation

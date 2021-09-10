@@ -1,18 +1,21 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import {
-  TodoRepository,
-  UpdateTodoCommand,
-} from '@wjanaszek/api-todo/application';
 import { TodoEntity, TodoValidation } from '@wjanaszek/api-todo/domain';
-import { ApplicationError, ApplicationErrorType } from '@wjanaszek/shared/application';
+import {
+  ApplicationError,
+  ApplicationErrorType,
+} from '@wjanaszek/shared/application';
+import { TodoRepository } from '../../todo.repository';
+import { CreateTodoCommand } from './create-todo.command';
 
-@CommandHandler(UpdateTodoCommand)
-export class UpdateTodoCommandHandler
-  implements ICommandHandler<UpdateTodoCommand, TodoEntity>
+// @TODO napisac migracje
+// @TODO napisac testy do command/query handlerow itd.
+@CommandHandler(CreateTodoCommand)
+export class CreateTodoCommandHandler
+  implements ICommandHandler<CreateTodoCommand, TodoEntity>
 {
   constructor(private readonly todoRepository: TodoRepository) {}
 
-  execute(command: UpdateTodoCommand): Promise<TodoEntity> {
+  execute(command: CreateTodoCommand): Promise<TodoEntity> {
     return new Promise((resolve, reject) => {
       if (command.name.length > TodoValidation.maxLength) {
         reject(
@@ -24,7 +27,7 @@ export class UpdateTodoCommandHandler
         );
       }
 
-      resolve(this.todoRepository.update(command));
+      resolve(this.todoRepository.create(command));
     });
   }
 }

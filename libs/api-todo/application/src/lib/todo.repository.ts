@@ -1,6 +1,6 @@
 import { TodoEntity, TodoUid } from '@wjanaszek/api-todo/domain';
-import { CreateTodoCommand } from './commands/create-todo.command';
-import { UpdateTodoCommand } from './commands/update-todo.command';
+import { CreateTodoCommand } from './commands/create/create-todo.command';
+import { UpdateTodoCommand } from './commands/update/update-todo.command';
 
 export abstract class TodoRepository {
   abstract create(data: CreateTodoCommand): Promise<TodoEntity>;
