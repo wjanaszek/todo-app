@@ -26,6 +26,56 @@
         }
       }
     },
+    "api-auth-infrastructure": {
+      "root": "libs/api-auth/infrastructure",
+      "sourceRoot": "libs/api-auth/infrastructure/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/api-auth/infrastructure/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/api-auth/infrastructure"
+          ],
+          "options": {
+            "jestConfig": "libs/api-auth/infrastructure/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "api-auth-shell": {
+      "root": "libs/api-auth/shell",
+      "sourceRoot": "libs/api-auth/shell/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/api-auth/shell/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/api-auth/shell"
+          ],
+          "options": {
+            "jestConfig": "libs/api-auth/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "api-auth-ui": {
       "root": "libs/api-auth/ui",
       "sourceRoot": "libs/api-auth/ui/src",

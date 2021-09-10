@@ -1,9 +1,9 @@
 import { Controller, Post, Request, UseGuards } from '@nestjs/common';
-import { LocalAuthGuard } from '@wjanaszek/api-auth/application';
+import { CredentialsAuthGuard } from '@wjanaszek/api-auth/application';
 
 @Controller('auth')
 export class RestApiAuthController {
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(CredentialsAuthGuard)
   @Post('login')
   async login(@Request() req: Request) {
     return (req as any).user;

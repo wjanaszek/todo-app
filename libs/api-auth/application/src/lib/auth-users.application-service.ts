@@ -1,6 +1,3 @@
-// @TODO This should be a real class/interface representing a user entity
-export type User = any;
-
-export abstract class AuthUsersApplicationService {
+export abstract class AuthUsersApplicationService<User = unknown> {
   abstract findOne(username: string): Promise<User | undefined>;
 }

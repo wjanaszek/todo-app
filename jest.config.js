@@ -11,5 +11,7 @@ module.exports = {
     '<rootDir>/libs/shared/application',
     '<rootDir>/libs/api-auth/application',
     '<rootDir>/libs/api-auth/ui',
+    '<rootDir>/libs/api-auth/shell',
+    '<rootDir>/libs/api-auth/infrastructure',
   ],
 };

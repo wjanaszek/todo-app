@@ -1,32 +1,29 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
-import { AuthUsersApplicationService } from './auth-users.application-service';
 import { AuthApplicationService } from './auth.application-service';
-import { LocalAuthUsersApplicationServiceImplementation } from './local/local-auth-users.application-service.implementation';
-import { LocalAuthApplicationServiceImplementation } from './local/local-auth.application-service.implementation';
-import { LocalAuthGuard } from './local/local-auth.guard';
-import { LocalStrategy } from './local/local.strategy';
+import { CredentialsAuthApplicationService } from './credentials/credentials-auth.application-service';
+import { CredentialsAuthGuard } from './credentials/credentials-auth.guard';
+import { CredentialsStrategy } from './credentials/credentials.strategy';
 
 @Module({
-  imports: [PassportModule]
+  imports: [PassportModule],
 })
 export class ApiAuthApplicationModule {
-  static withLocal(): DynamicModule {
+  static withCredentialsInfrastructure(
+    infrastructureModules: DynamicModule[]
+  ): DynamicModule {
     return {
       module: ApiAuthApplicationModule,
+      imports: infrastructureModules,
       providers: [
-        LocalAuthGuard,
-        LocalStrategy,
+        CredentialsAuthGuard,
+        CredentialsStrategy,
         {
           provide: AuthApplicationService,
-          useClass: LocalAuthApplicationServiceImplementation,
-        },
-        {
-          provide: AuthUsersApplicationService,
-          useClass: LocalAuthUsersApplicationServiceImplementation,
+          useClass: CredentialsAuthApplicationService,
         },
       ],
-      exports: [AuthUsersApplicationService, LocalAuthGuard],
+      exports: [CredentialsAuthGuard],
     };
   }
 }

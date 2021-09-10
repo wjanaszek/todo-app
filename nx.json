@@ -30,8 +30,14 @@
     "api-auth-application": {
       "tags": ["type:application", "scope:api-auth"]
     },
+    "api-auth-infrastructure": {
+      "tags": ["type:infrastructure", "scope:api-auth"]
+    },
+    "api-auth-shell": {
+      "tags": ["type:shell", "scope:api-auth"]
+    },
     "api-auth-ui": {
-      "tags": []
+      "tags": ["type:ui", "scope:api-auth"]
     },
     "api-todo": {
       "tags": ["type:api-application", "scope:api-todo"]

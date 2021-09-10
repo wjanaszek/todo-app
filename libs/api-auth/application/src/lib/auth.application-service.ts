@@ -1,3 +1,3 @@
-export abstract class AuthApplicationService {
-  abstract validateUser(username: string, password: string): Promise<any>;
+export abstract class AuthApplicationService<User = unknown> {
+  abstract validateUser(username: string, password: string): Promise<User>;
 }
