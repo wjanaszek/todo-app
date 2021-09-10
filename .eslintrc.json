@@ -43,7 +43,15 @@
               },
               {
                 "sourceTag": "scope:api-todo",
-                "onlyDependOnLibsWithTags": ["scope:api-todo", "scope:shared"]
+                "onlyDependOnLibsWithTags": [
+                  "scope:api-todo",
+                  "scope:api-auth",
+                  "scope:shared"
+                ]
+              },
+              {
+                "sourceTag": "scope:api-auth",
+                "onlyDependOnLibsWithTags": ["scope:api-auth", "scope:shared"]
               }
             ]
           }

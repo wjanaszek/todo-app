@@ -9,5 +9,7 @@ module.exports = {
     '<rootDir>/libs/api-todo/ui',
     '<rootDir>/libs/shared/infrastructure',
     '<rootDir>/libs/shared/application',
+    '<rootDir>/libs/api-auth/application',
+    '<rootDir>/libs/api-auth/ui',
   ],
 };

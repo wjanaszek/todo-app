@@ -1,6 +1,56 @@
 {
   "version": 2,
   "projects": {
+    "api-auth-application": {
+      "root": "libs/api-auth/application",
+      "sourceRoot": "libs/api-auth/application/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/api-auth/application/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/api-auth/application"
+          ],
+          "options": {
+            "jestConfig": "libs/api-auth/application/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "api-auth-ui": {
+      "root": "libs/api-auth/ui",
+      "sourceRoot": "libs/api-auth/ui/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/api-auth/ui/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/api-auth/ui"
+          ],
+          "options": {
+            "jestConfig": "libs/api-auth/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "api-todo": {
       "root": "apps/api-todo",
       "sourceRoot": "apps/api-todo/src",

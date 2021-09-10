@@ -27,6 +27,12 @@
     ]
   },
   "projects": {
+    "api-auth-application": {
+      "tags": ["type:application", "scope:api-auth"]
+    },
+    "api-auth-ui": {
+      "tags": []
+    },
     "api-todo": {
       "tags": ["type:api-application", "scope:api-todo"]
     },
