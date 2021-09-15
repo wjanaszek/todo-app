@@ -15,6 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@wjanaszek/api-auth/application": [
+        "libs/api-auth/application/src/index.ts"
+      ],
+      "@wjanaszek/api-auth/infrastructure": [
+        "libs/api-auth/infrastructure/src/index.ts"
+      ],
+      "@wjanaszek/api-auth/shell": ["libs/api-auth/shell/src/index.ts"],
+      "@wjanaszek/api-auth/ui": ["libs/api-auth/ui/src/index.ts"],
       "@wjanaszek/api-todo/application": [
         "libs/api-todo/application/src/index.ts"
       ],
