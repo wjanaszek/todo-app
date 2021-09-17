@@ -7,7 +7,6 @@ import {
 import { TodoRepository } from '../../todo.repository';
 import { CreateTodoCommand } from './create-todo.command';
 
-// @TODO napisac migracje
 // @TODO napisac testy do command/query handlerow itd.
 @CommandHandler(CreateTodoCommand)
 export class CreateTodoCommandHandler

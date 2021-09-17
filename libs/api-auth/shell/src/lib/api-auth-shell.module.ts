@@ -4,8 +4,8 @@ import { ApiAuthInfrastructureModule } from '@wjanaszek/api-auth/infrastructure'
 
 @Module({
   imports: [
-    ApiAuthApplicationModule.withCredentialsInfrastructure([
-      ApiAuthInfrastructureModule.forCredentialsRoot(),
+    ApiAuthApplicationModule.withJwtInfrastructure([
+      ApiAuthInfrastructureModule.forJwtRoot(),
     ]),
   ],
   exports: [ApiAuthApplicationModule],

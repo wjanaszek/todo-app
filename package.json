@@ -23,7 +23,13 @@
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "typeorm": "ts-node  -O '{\"module\": \"commonjs\"}'  -P tsconfig.base.json -r tsconfig-paths/register ./node_modules/.bin/typeorm",
+    "migration:generate": "npm run typeorm migration:generate -- -n",
+    "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config",
+    "seed:run": "ts-node  -O '{\"module\": \"commonjs\", \"allowSyntheticDefaultImports\": true}' -P tsconfig.base.json -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed",
+    "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
+    "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +41,7 @@
     "@nestjs/passport": "^8.0.1",
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/typeorm": "^7.0.0",
+    "bcrypt": "^5.0.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
@@ -55,6 +62,8 @@
     "@nrwl/node": "12.5.1",
     "@nrwl/tao": "12.5.1",
     "@nrwl/workspace": "12.5.1",
+    "@types/bcrypt": "^5.0.0",
+    "@types/faker": "^5.5.8",
     "@types/jest": "26.0.8",
     "@types/node": "14.14.33",
     "@types/passport-jwt": "^3.0.6",
@@ -68,6 +77,7 @@
     "prettier": "^2.3.1",
     "ts-jest": "27.0.3",
     "ts-node": "~9.1.1",
+    "typeorm-seeding": "^1.6.1",
     "typescript": "~4.2.4"
   }
 }

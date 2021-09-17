@@ -30,6 +30,9 @@
     "api-auth-application": {
       "tags": ["type:application", "scope:api-auth"]
     },
+    "api-auth-domain": {
+      "tags": ["type:domain", "scope:api-auth"]
+    },
     "api-auth-infrastructure": {
       "tags": ["type:infrastructure", "scope:api-auth"]
     },

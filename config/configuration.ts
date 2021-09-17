@@ -8,4 +8,8 @@ export default () => ({
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
   },
+  jwt: {
+    secret: process.env.JWT_SECRET || 'secret',
+    expiresIn: `${parseInt(process.env.JWT_EXPIRES_IN, 10) || 36000}s`,
+  },
 });

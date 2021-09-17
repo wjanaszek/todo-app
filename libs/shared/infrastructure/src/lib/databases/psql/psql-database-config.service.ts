@@ -8,7 +8,7 @@ import { DatabaseConfigService } from '../database-config.service';
 export class PsqlDatabaseConfigService implements DatabaseConfigService {
   constructor(private readonly configService: ConfigService) {}
 
-  getOptions(entities: (typeof BaseEntity)[]): TypeOrmModuleOptions {
+  getOptions(entities: typeof BaseEntity[]): TypeOrmModuleOptions {
     return {
       type: this.configService.get<'postgres'>('database.type'),
       host: this.configService.get<string>('database.host'),
@@ -16,8 +16,8 @@ export class PsqlDatabaseConfigService implements DatabaseConfigService {
       username: this.configService.get<string>('database.username'),
       password: this.configService.get<string>('database.password'),
       database: this.configService.get<string>('database.name'),
-      entities: entities,
-      synchronize: true,
+      autoLoadEntities: true,
+      synchronize: false,
     };
   }
 }
