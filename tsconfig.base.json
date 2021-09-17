@@ -18,6 +18,7 @@
       "@wjanaszek/api-auth/application": [
         "libs/api-auth/application/src/index.ts"
       ],
+      "@wjanaszek/api-auth/domain": ["libs/api-auth/domain/src/index.ts"],
       "@wjanaszek/api-auth/infrastructure": [
         "libs/api-auth/infrastructure/src/index.ts"
       ],

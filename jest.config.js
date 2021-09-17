@@ -13,5 +13,6 @@ module.exports = {
     '<rootDir>/libs/api-auth/ui',
     '<rootDir>/libs/api-auth/shell',
     '<rootDir>/libs/api-auth/infrastructure',
+    '<rootDir>/libs/api-auth/domain',
   ],
 };

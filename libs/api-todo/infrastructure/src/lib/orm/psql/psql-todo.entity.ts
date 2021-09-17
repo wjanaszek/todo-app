@@ -6,7 +6,7 @@ import {
 } from '@wjanaszek/api-todo/domain';
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('todo')
 export class PsqlTodoEntity extends BaseEntity implements TodoEntity {
   @PrimaryGeneratedColumn('uuid')
   uid: TodoUid;
