@@ -142,7 +142,8 @@
             "tsConfig": "apps/api-todo/tsconfig.app.json",
             "assets": [
               "apps/api-todo/src/assets"
-            ]
+            ],
+            "tsPlugins": ["@nestjs/swagger/plugin"]
           },
           "configurations": {
             "production": {
