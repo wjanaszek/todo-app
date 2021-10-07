@@ -9,28 +9,21 @@ import {
   InternalServerErrorException,
   Param,
   Post,
-  Put,
+  Put
 } from '@nestjs/common';
-import {
-  TodoApplicationService,
-  TodoReadModel,
-} from '@wjanaszek/api-todo/application';
+import { TodoApplicationService } from '@wjanaszek/api-todo/application';
 import { TodoUid } from '@wjanaszek/api-todo/domain';
-import {
-  CreateTodoDto,
-  UpdateTodoDto,
-} from '@wjanaszek/api-todo/infrastructure';
-import {
-  ApplicationError,
-  ApplicationErrorType,
-} from '@wjanaszek/shared/application';
+import { CreateTodoDto, TodoDto, UpdateTodoDto } from '@wjanaszek/api-todo/infrastructure';
+import { ApplicationError, ApplicationErrorType } from '@wjanaszek/shared/application';
 import { HttpNotFoundException } from '@wjanaszek/shared/infrastructure';
 
 @Controller(RestApiTodoController.URI)
 export class RestApiTodoController {
   static readonly URI = 'todos';
 
-  constructor(private readonly todoApplicationService: TodoApplicationService) {}
+  constructor(
+    private readonly todoApplicationService: TodoApplicationService
+  ) {}
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
@@ -66,12 +59,12 @@ export class RestApiTodoController {
   }
 
   @Get()
-  findAll(): Promise<TodoReadModel[]> {
+  findAll(): Promise<TodoDto[]> {
     return this.todoApplicationService.findAll();
   }
 
   @Get(':id')
-  async findById(@Param('id') id: TodoUid): Promise<TodoReadModel | null> {
+  async findById(@Param('id') id: TodoUid): Promise<TodoDto | null> {
     try {
       return await this.todoApplicationService.findById(id);
     } catch (error) {
@@ -86,11 +79,16 @@ export class RestApiTodoController {
     }
   }
 
+  /**
+   * Update a ToDo
+   * @param id entity uuid
+   * @param dto
+   */
   @Put(':id')
   async update(
     @Param('id') id: TodoUid,
-    @Body() dto: Partial<UpdateTodoDto>
-  ): Promise<TodoReadModel> {
+    @Body() dto: UpdateTodoDto
+  ): Promise<TodoDto> {
     try {
       return await this.todoApplicationService.update(id, dto);
     } catch (error) {

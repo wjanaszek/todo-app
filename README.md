@@ -1,6 +1,12 @@
 
 
-# Wjanaszek
+# TODO application
+
+# Swagger
+* Run `npm start`
+* Go to `http://localhost:3000/swagger`
+
+# Nx
 
 This project was generated using [Nx](https://nx.dev).
 
