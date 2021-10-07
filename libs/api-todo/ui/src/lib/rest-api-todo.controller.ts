@@ -26,8 +26,10 @@ import {
 } from '@wjanaszek/shared/application';
 import { HttpNotFoundException } from '@wjanaszek/shared/infrastructure';
 
-@Controller('todos')
+@Controller(RestApiTodoController.URI)
 export class RestApiTodoController {
+  static readonly URI = 'todos';
+
   constructor(private readonly todoApplicationService: TodoApplicationService) {}
 
   @Post()

@@ -8,8 +8,10 @@ import {
 } from '@wjanaszek/api-auth/application';
 import { LoginRequest } from '@wjanaszek/api-auth/infrastructure';
 
-@Controller('auth')
+@Controller(RestApiAuthController.URI)
 export class RestApiAuthController {
+  static readonly URI = 'auth';
+
   constructor(
     private readonly authApplicationService: AuthApplicationService<
       JwtAuthUser,
