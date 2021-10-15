@@ -1,4 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
 import { ApiAuthShellModule } from '@wjanaszek/api-auth/shell';
 import {
   RestLoggingMiddleware,
@@ -7,7 +8,7 @@ import {
 import { RestApiAuthController } from './rest-api-auth.controller';
 
 @Module({
-  imports: [ApiAuthShellModule, RestLoggingMiddlewareModule.forRoot()],
+  imports: [ApiAuthShellModule, CqrsModule, RestLoggingMiddlewareModule.forRoot()],
   controllers: [RestApiAuthController],
 })
 export class ApiAuthUiModule implements NestModule {

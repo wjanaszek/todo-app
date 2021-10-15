@@ -1,12 +1,26 @@
-import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
+import { CommandBus } from '@nestjs/cqrs';
 import {
   AuthApplicationService,
   JwtAuthGuard,
   JwtAuthUser,
   JwtLoginAuthGuard,
   JwtTokenPayload,
+  SignUpUserCommand,
 } from '@wjanaszek/api-auth/application';
-import { LoginRequest } from '@wjanaszek/api-auth/infrastructure';
+import {
+  LoginRequest,
+  SignUpUserDto,
+} from '@wjanaszek/api-auth/infrastructure';
 
 @Controller(RestApiAuthController.URI)
 export class RestApiAuthController {
@@ -16,13 +30,22 @@ export class RestApiAuthController {
     private readonly authApplicationService: AuthApplicationService<
       JwtAuthUser,
       JwtTokenPayload
-    >
+    >,
+    private readonly commandBus: CommandBus
   ) {}
 
   @UseGuards(JwtLoginAuthGuard)
-  @Post('login/jwt')
-  async loginJwt(@Request() req: LoginRequest): Promise<JwtTokenPayload> {
+  @Post('login')
+  async login(@Request() req: LoginRequest): Promise<JwtTokenPayload> {
     return this.authApplicationService.getAuthPayload(req.user);
+  }
+
+  @Post('signUp')
+  @HttpCode(HttpStatus.CREATED)
+  async signUp(@Body() dto: SignUpUserDto): Promise<void> {
+    return this.commandBus.execute(
+      new SignUpUserCommand(dto.id, dto.email, dto.username, dto.password)
+    );
   }
 
   @UseGuards(JwtAuthGuard)

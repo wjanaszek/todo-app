@@ -9,9 +9,11 @@ export interface AuthUserEntity {
 
 export const AuthUserValidation = {
   username: {
+    minLength: 2,
     maxLength: 100,
   },
   email: {
+    minLength: 3,
     maxLength: 100,
   },
 };
