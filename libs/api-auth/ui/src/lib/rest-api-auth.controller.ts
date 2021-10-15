@@ -15,10 +15,12 @@ import {
   JwtAuthUser,
   JwtLoginAuthGuard,
   JwtTokenPayload,
+  ResetPasswordCommand,
   SignUpUserCommand,
 } from '@wjanaszek/api-auth/application';
 import {
   LoginRequest,
+  ResetPasswordDto,
   SignUpUserDto,
 } from '@wjanaszek/api-auth/infrastructure';
 
@@ -46,6 +48,11 @@ export class RestApiAuthController {
     return this.commandBus.execute(
       new SignUpUserCommand(dto.id, dto.email, dto.username, dto.password)
     );
+  }
+
+  @Post('resetPassword')
+  async resetPassword(@Body() dto: ResetPasswordDto): Promise<void> {
+    return this.commandBus.execute(new ResetPasswordCommand(dto.email));
   }
 
   @UseGuards(JwtAuthGuard)

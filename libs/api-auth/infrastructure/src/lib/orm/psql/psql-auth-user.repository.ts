@@ -3,8 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {
   AuthUserRepository,
   AuthUserSignUpValidationException,
-  SignUpUserCommand
+  SignUpUserCommand,
 } from '@wjanaszek/api-auth/application';
+import { AuthUserEntity } from '@wjanaszek/api-auth/domain';
 import { PsqlErrorCode } from '@wjanaszek/shared/infrastructure';
 import { QueryFailedError, Repository } from 'typeorm';
 import { PsqlAuthUserEntity } from './psql-auth-user.entity';
@@ -15,6 +16,14 @@ export class PsqlAuthUserRepository implements AuthUserRepository {
     @InjectRepository(PsqlAuthUserEntity)
     private readonly authUserRepository: Repository<PsqlAuthUserEntity>
   ) {}
+
+  async findByEmail(email: string): Promise<AuthUserEntity | undefined> {
+    return this.authUserRepository.findOne({ where: { email } });
+  }
+
+  async save(data: AuthUserEntity): Promise<AuthUserEntity> {
+    return this.authUserRepository.save(data);
+  }
 
   async signUp(data: SignUpUserCommand): Promise<void> {
     try {
