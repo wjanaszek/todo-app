@@ -3,26 +3,32 @@ import {
   AuthUserId,
   AuthUserValidation,
 } from '@wjanaszek/api-auth/domain';
+import * as bcrypt from 'bcrypt';
 import {
   BaseEntity,
   BeforeInsert,
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  Unique,
 } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 
 @Entity('authUser')
-@Unique(['email', 'username'])
 export class PsqlAuthUserEntity extends BaseEntity implements AuthUserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: AuthUserId;
 
-  @Column({ type: 'varchar', length: AuthUserValidation.email.maxLength })
+  @Column({
+    type: 'varchar',
+    length: AuthUserValidation.email.maxLength,
+    unique: true,
+  })
   email: string;
 
-  @Column({ type: 'varchar', length: AuthUserValidation.username.maxLength })
+  @Column({
+    type: 'varchar',
+    length: AuthUserValidation.username.maxLength,
+    unique: true,
+  })
   username: string;
 
   @Column({ type: 'varchar' })

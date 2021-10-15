@@ -1,8 +1,11 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { AuthUserDomainModule } from '@wjanaszek/api-auth/domain';
 import configuration from '../../../../../config/configuration';
 import { AuthApplicationService } from './auth.application-service';
+import { CommandHandlers } from './cqrs/commands/api-auth-commands.provider';
 import { CredentialsAuthApplicationService } from './credentials/credentials-auth.application-service';
 import { CredentialsAuthGuard } from './credentials/credentials-auth.guard';
 import { CredentialsStrategy } from './credentials/credentials.strategy';
@@ -13,7 +16,8 @@ import { JwtLoginStrategy } from './jwt/jwt-login.strategy';
 import { JwtStrategy } from './jwt/jwt.strategy';
 
 @Module({
-  imports: [PassportModule],
+  imports: [AuthUserDomainModule, CqrsModule, PassportModule],
+  providers: [...CommandHandlers],
 })
 export class ApiAuthApplicationModule {
   static withCredentialsInfrastructure(

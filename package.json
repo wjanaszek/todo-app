@@ -27,9 +27,7 @@
     "typeorm": "ts-node  -O '{\"module\": \"commonjs\"}'  -P tsconfig.base.json -r tsconfig-paths/register ./node_modules/.bin/typeorm",
     "migration:generate": "npm run typeorm migration:generate -- -n",
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config",
-    "seed:run": "ts-node  -O '{\"module\": \"commonjs\", \"allowSyntheticDefaultImports\": true}' -P tsconfig.base.json -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed",
-    "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
-    "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync"
+    "seed:run": "ts-node  -O '{\"module\": \"commonjs\", \"allowSyntheticDefaultImports\": true}' -P tsconfig.base.json -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed"
   },
   "private": true,
   "dependencies": {
