@@ -5,7 +5,6 @@ import {
 import {
   Column,
   Entity,
-  Generated,
   JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -16,14 +15,11 @@ import { PsqlAuthUserEntity } from './psql-auth-user.entity';
 export class PsqlAuthResetPasswordTokenEntity
   implements AuthResetPasswordTokenEntity
 {
-  @PrimaryGeneratedColumn('uuid')
-  id: AuthResetPasswordTokenId;
-
   @Column({ type: 'timestamp' })
   expirationDate: Date;
 
-  @Generated('uuid')
-  token: string;
+  @PrimaryGeneratedColumn('uuid')
+  token: AuthResetPasswordTokenId;
 
   @OneToOne(() => PsqlAuthUserEntity)
   @JoinColumn()

@@ -1,4 +1,5 @@
 export * from './lib/cqrs/commands/reset-password/reset-password.command';
+export * from './lib/cqrs/commands/set-password/set-password.command';
 export * from './lib/cqrs/commands/sign-up/sign-up-user.command';
 export * from './lib/cqrs/write-models/sign-up-user.write-model';
 
@@ -6,6 +7,8 @@ export * from './lib/credentials/credentials-auth-user.interface';
 export * from './lib/credentials/credentials-auth.guard';
 
 export * from './lib/exceptions/auth-reset-user-password-not-found.exception';
+export * from './lib/exceptions/auth-set-password-failed.exception';
+export * from './lib/exceptions/auth-set-password-token-invalid.exception';
 export * from './lib/exceptions/auth-user-not-found.exception';
 export * from './lib/exceptions/auth-user-sign-up-validation.exception';
 export * from './lib/exceptions/auth-wrong-password.exception';

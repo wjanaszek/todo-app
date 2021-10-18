@@ -10,5 +10,9 @@ export abstract class AuthResetPasswordTokenRepository {
     expirationDate: Date
   ): Promise<AuthResetPasswordTokenEntity>;
 
+  abstract findOne(
+    id: AuthResetPasswordTokenId
+  ): Promise<AuthResetPasswordTokenEntity | undefined>;
+
   abstract remove(id: AuthResetPasswordTokenId): Promise<void>;
 }
