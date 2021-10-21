@@ -1,9 +1,13 @@
+import { MailerModule } from '@nestjs-modules/mailer';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiAuthUiModule } from '@wjanaszek/api-auth/ui';
 import { ApiTodoUiModule } from '@wjanaszek/api-todo/ui';
-import { DatabaseConfigService, DatabaseModule } from '@wjanaszek/shared/infrastructure';
+import {
+  DatabaseConfigService,
+  DatabaseModule,
+} from '@wjanaszek/shared/infrastructure';
 import configuration from '../../../../config/configuration';
 
 @Module({
@@ -16,9 +20,19 @@ import configuration from '../../../../config/configuration';
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule, DatabaseModule.forPostgres()],
-      useFactory: (config: DatabaseConfigService) =>
-        config.getOptions([]),
+      useFactory: (config: DatabaseConfigService) => config.getOptions([]),
       inject: [DatabaseConfigService],
+    }),
+    MailerModule.forRootAsync({
+      useFactory: (config: ConfigService) => {
+        return {
+          transport: config.get<string>('mail.transport'),
+          defaults: {
+            from: config.get<string>('mail.from'),
+          },
+        };
+      },
+      inject: [ConfigService],
     }),
   ],
 })

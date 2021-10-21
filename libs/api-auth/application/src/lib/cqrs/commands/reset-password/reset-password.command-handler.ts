@@ -1,24 +1,28 @@
+import { ConfigService } from '@nestjs/config';
 import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs';
-import configuration from '../../../../../../../../config/configuration';
 import { AuthResetUserPasswordNotFoundException } from '../../../exceptions/auth-reset-user-password-not-found.exception';
 import { AuthResetPasswordTokenRepository } from '../../../repositories/auth-reset-password-token.repository';
 import { AuthUserRepository } from '../../../repositories/auth-user.repository';
 import { ResetPasswordTokenGeneratedEvent } from '../../events/reset-password/reset-password-token-generated.event';
 import { ResetPasswordCommand } from './reset-password.command';
+import { ResetPasswordResult } from './reset-password.result';
 
 @CommandHandler(ResetPasswordCommand)
 export class ResetPasswordCommandHandler
-  implements ICommandHandler<ResetPasswordCommand, void>
+  implements ICommandHandler<ResetPasswordCommand, ResetPasswordResult>
 {
-  private readonly expirationDate = configuration().resetPassword.expiresIn;
+  private readonly expirationDate = this.configService.get<number>(
+    'resetPassword.expiresIn'
+  ) as number;
 
   constructor(
     private readonly authUserRepository: AuthUserRepository,
     private readonly authResetPasswordTokenRepository: AuthResetPasswordTokenRepository,
+    private readonly configService: ConfigService,
     private readonly eventBus: EventBus
   ) {}
 
-  async execute(command: ResetPasswordCommand): Promise<void> {
+  async execute(command: ResetPasswordCommand): Promise<ResetPasswordResult> {
     const user = await this.authUserRepository.findByEmail(command.userEmail);
 
     if (!user) {
@@ -32,5 +36,6 @@ export class ResetPasswordCommandHandler
     );
 
     this.eventBus.publish(new ResetPasswordTokenGeneratedEvent(token));
+    return ResetPasswordResult.FAIL_OR_SUCCESS;
   }
 }

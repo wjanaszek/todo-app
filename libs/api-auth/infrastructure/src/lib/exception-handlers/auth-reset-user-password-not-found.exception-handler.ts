@@ -4,7 +4,10 @@ import {
   ExceptionFilter,
   HttpStatus,
 } from '@nestjs/common';
-import { AuthResetUserPasswordNotFoundException } from '@wjanaszek/api-auth/application';
+import {
+  AuthResetUserPasswordNotFoundException,
+  ResetPasswordResult,
+} from '@wjanaszek/api-auth/application';
 import { Response } from 'express';
 
 @Catch(AuthResetUserPasswordNotFoundException)
@@ -20,7 +23,7 @@ export class AuthResetUserPasswordNotFoundExceptionHandler
 
     response.status(HttpStatus.OK).json({
       statusCode: HttpStatus.OK,
-      message: 'If user exists he will receive an email',
+      message: ResetPasswordResult.FAIL_OR_SUCCESS,
     });
   }
 }

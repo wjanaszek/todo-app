@@ -13,8 +13,13 @@ export default () => ({
     expiresIn: `${parseInt(process.env.JWT_EXPIRES_IN, 10) || 36000}s`,
   },
   resetPassword: {
-    expiresIn: `${
-      parseInt(process.env.RESET_PASSWORD_EXPIRES_IN, 10) || 24 * 60 * 1000
-    }s`,
+    expiresIn:
+      parseInt(process.env.RESET_PASSWORD_EXPIRES_IN, 10) || 24 * 60 * 1000,
+  },
+  mail: {
+    transport:
+      process.env.MAIL_TRANSPORT ||
+      'smtps://user@domain.com:pass@smtp.domain.com',
+    from: process.env.MAIL_FROM || `"ToDo App" <todo-app@wjanaszek.com>`,
   },
 });

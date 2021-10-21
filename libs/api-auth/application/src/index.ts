@@ -1,4 +1,5 @@
 export * from './lib/cqrs/commands/reset-password/reset-password.command';
+export * from './lib/cqrs/commands/reset-password/reset-password.result';
 export * from './lib/cqrs/commands/set-password/set-password.command';
 export * from './lib/cqrs/commands/sign-up/sign-up-user.command';
 export * from './lib/cqrs/write-models/sign-up-user.write-model';
