@@ -51,6 +51,9 @@
     "api-todo-domain": {
       "tags": ["type:domain", "scope:api-todo"]
     },
+    "api-todo-e2e": {
+      "tags": []
+    },
     "api-todo-infrastructure": {
       "tags": ["type:infrastructure", "scope:api-todo"]
     },

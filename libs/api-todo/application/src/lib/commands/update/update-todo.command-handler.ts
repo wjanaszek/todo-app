@@ -13,7 +13,7 @@ export class UpdateTodoCommandHandler
 {
   constructor(private readonly todoRepository: TodoRepository) {}
 
-  execute(command: UpdateTodoCommand): Promise<TodoEntity> {
+  async execute(command: UpdateTodoCommand): Promise<TodoEntity> {
     return new Promise((resolve, reject) => {
       if (command.name.length > TodoValidation.maxLength) {
         reject(

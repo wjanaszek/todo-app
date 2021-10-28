@@ -14,7 +14,7 @@
             "depConstraints": [
               {
                 "sourceTag": "type:application",
-                "onlyDependOnLibsWithTags": ["type:domain"]
+                "onlyDependOnLibsWithTags": ["type:application", "type:domain"]
               },
               {
                 "sourceTag": "type:domain",
@@ -22,7 +22,7 @@
               },
               {
                 "sourceTag": "type:infrastructure",
-                "onlyDependOnLibsWithTags": ["type:application", "type:domain"]
+                "onlyDependOnLibsWithTags": ["type:application", "type:domain", "type:infrastructure"]
               },
               {
                 "sourceTag": "type:shell",

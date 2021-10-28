@@ -14,5 +14,6 @@ module.exports = {
     '<rootDir>/libs/api-auth/shell',
     '<rootDir>/libs/api-auth/infrastructure',
     '<rootDir>/libs/api-auth/domain',
+    '<rootDir>/apps/api-todo-e2e',
   ],
 };

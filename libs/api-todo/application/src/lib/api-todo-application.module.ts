@@ -3,6 +3,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { CreateTodoCommandHandler } from './commands/create/create-todo.command-handler';
 import { DeleteTodoCommandHandler } from './commands/delete/delete-todo.command-handler';
 import { UpdateTodoCommandHandler } from './commands/update/update-todo.command-handler';
+import { UserSignedUpEventHandler } from './events/user-signed-up.event-handler';
 import { FindAllTodoQueryHandler } from './queries/find-all-todo/find-all-todo.query-handler';
 import { FindTodoByIdQueryHandler } from './queries/find-todo-by-id/find-todo-by-id.query-handler';
 import { TodoApplicationService } from './todo.application-service';
@@ -13,11 +14,11 @@ const CommandHandlers = [
   DeleteTodoCommandHandler,
   UpdateTodoCommandHandler,
 ];
+const EventHandlers = [UserSignedUpEventHandler];
 const QueryHandlers = [FindAllTodoQueryHandler, FindTodoByIdQueryHandler];
 
 @Module({
   imports: [CqrsModule],
-  providers: [...CommandHandlers, ...QueryHandlers],
 })
 export class ApiTodoApplicationModule {
   static withInfrastructure(
@@ -31,6 +32,9 @@ export class ApiTodoApplicationModule {
           provide: TodoApplicationService,
           useClass: TodoApplicationServiceImplementation,
         },
+        ...CommandHandlers,
+        ...EventHandlers,
+        ...QueryHandlers,
       ],
       exports: [TodoApplicationService],
     };

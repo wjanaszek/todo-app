@@ -9,7 +9,7 @@ export class FindTodoByIdQueryHandler
 {
   constructor(private readonly todoRepository: TodoRepository) {}
 
-  execute(query: FindTodoByIdQuery): Promise<TodoEntity | undefined> {
-    return this.todoRepository.findById(query.uid);
+  async execute(query: FindTodoByIdQuery): Promise<TodoEntity | undefined> {
+    return this.todoRepository.findById(query.id, query.authorId);
   }
 }

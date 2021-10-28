@@ -13,4 +13,6 @@ export * from './lib/write-models/update-todo.write-model';
 export * from './lib/todo.application-service';
 export * from './lib/todo.repository';
 
+export * from './lib/todo-author.repository';
+
 export * from './lib/api-todo-application.module';
