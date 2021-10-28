@@ -1,6 +1,6 @@
 import { AuthUserId } from '@wjanaszek/api-auth/domain';
 
-export interface SignUpUserDto {
+export class SignUpUserDto {
   id: AuthUserId;
   email: string;
   username: string;

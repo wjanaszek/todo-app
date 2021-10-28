@@ -1,6 +1,7 @@
+import { ICommand } from '@nestjs/cqrs';
 import { TodoStatus, TodoUid } from '@wjanaszek/api-todo/domain';
 
-export class UpdateTodoCommand {
+export class UpdateTodoCommand implements ICommand {
   constructor(
     public readonly uid: TodoUid,
     public readonly name: string,

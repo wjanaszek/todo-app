@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { AuthUserValidationDomainService } from '@wjanaszek/api-auth/domain';
 import { DomainError } from '@wjanaszek/shared/domain';
-import { AuthUserRepository } from '../../../auth-user.repository';
+import { AuthUserRepository } from '../../../repositories/auth-user.repository';
 import { AuthUserSignUpValidationException } from '../../../exceptions/auth-user-sign-up-validation.exception';
 import { SignUpUserCommand } from './sign-up-user.command';
 

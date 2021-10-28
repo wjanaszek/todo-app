@@ -6,6 +6,7 @@ import { AuthUserDomainModule } from '@wjanaszek/api-auth/domain';
 import configuration from '../../../../../config/configuration';
 import { AuthApplicationService } from './auth.application-service';
 import { CommandHandlers } from './cqrs/commands/api-auth-commands.provider';
+import { EventHandlers } from './cqrs/events/api-auth-events.provider';
 import { CredentialsAuthApplicationService } from './credentials/credentials-auth.application-service';
 import { CredentialsAuthGuard } from './credentials/credentials-auth.guard';
 import { CredentialsStrategy } from './credentials/credentials.strategy';
@@ -17,7 +18,7 @@ import { JwtStrategy } from './jwt/jwt.strategy';
 
 @Module({
   imports: [AuthUserDomainModule, CqrsModule, PassportModule],
-  providers: [...CommandHandlers],
+  providers: [...CommandHandlers, ...EventHandlers],
 })
 export class ApiAuthApplicationModule {
   static withCredentialsInfrastructure(
