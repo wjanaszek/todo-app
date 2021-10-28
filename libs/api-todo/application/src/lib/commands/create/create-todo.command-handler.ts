@@ -7,14 +7,13 @@ import {
 import { TodoRepository } from '../../todo.repository';
 import { CreateTodoCommand } from './create-todo.command';
 
-// @TODO napisac testy do command/query handlerow itd.
 @CommandHandler(CreateTodoCommand)
 export class CreateTodoCommandHandler
   implements ICommandHandler<CreateTodoCommand, TodoEntity>
 {
   constructor(private readonly todoRepository: TodoRepository) {}
 
-  execute(command: CreateTodoCommand): Promise<TodoEntity> {
+  async execute(command: CreateTodoCommand): Promise<TodoEntity> {
     return new Promise((resolve, reject) => {
       if (command.name.length > TodoValidation.maxLength) {
         reject(

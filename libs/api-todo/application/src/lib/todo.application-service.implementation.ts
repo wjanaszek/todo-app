@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { TodoId } from '@wjanaszek/api-todo/domain';
+import { TodoAuthorId, TodoId } from '@wjanaszek/api-todo/domain';
 import { CreateTodoCommand } from './commands/create/create-todo.command';
 import { DeleteTodoCommand } from './commands/delete/delete-todo.command';
 import { UpdateTodoCommand } from './commands/update/update-todo.command';
@@ -20,27 +20,34 @@ export class TodoApplicationServiceImplementation
     private readonly queryBus: QueryBus
   ) {}
 
-  create(data: CreateTodoWriteModel): Promise<void> {
+  async create(data: CreateTodoWriteModel): Promise<void> {
     return this.commandBus.execute(
-      new CreateTodoCommand(data.id, data.name, data.status)
+      new CreateTodoCommand(data.id, data.name, data.status, data.authorId)
     );
   }
 
-  delete(id: TodoId): Promise<void> {
-    return this.commandBus.execute(new DeleteTodoCommand(id));
+  async delete(id: TodoId, authorId: TodoAuthorId): Promise<void> {
+    return this.commandBus.execute(new DeleteTodoCommand(id, authorId));
   }
 
-  findAll(): Promise<TodoReadModel[]> {
-    return this.queryBus.execute(new FindAllTodoQuery());
+  async findAll(authorId: TodoAuthorId): Promise<TodoReadModel[]> {
+    return this.queryBus.execute(new FindAllTodoQuery(authorId));
   }
 
-  findById(id: TodoId): Promise<TodoReadModel | null> {
-    return this.queryBus.execute(new FindTodoByIdQuery(id));
+  async findById(
+    id: TodoId,
+    authorId: TodoAuthorId
+  ): Promise<TodoReadModel | null> {
+    return this.queryBus.execute(new FindTodoByIdQuery(id, authorId));
   }
 
-  update(id: TodoId, data: UpdateTodoWriteModel): Promise<TodoReadModel> {
+  async update(
+    id: TodoId,
+    authorId: TodoAuthorId,
+    data: UpdateTodoWriteModel
+  ): Promise<TodoReadModel> {
     return this.commandBus.execute(
-      new UpdateTodoCommand(id, data.name, data.status)
+      new UpdateTodoCommand(id, data.name, data.status, authorId)
     );
   }
 }

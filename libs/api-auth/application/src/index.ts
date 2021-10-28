@@ -4,6 +4,8 @@ export * from './lib/cqrs/commands/set-password/set-password.command';
 export * from './lib/cqrs/commands/sign-up/sign-up-user.command';
 export * from './lib/cqrs/write-models/sign-up-user.write-model';
 
+export * from './lib/cqrs/events/sign-up/user-signed-up.event';
+
 export * from './lib/credentials/credentials-auth-user.interface';
 export * from './lib/credentials/credentials-auth.guard';
 

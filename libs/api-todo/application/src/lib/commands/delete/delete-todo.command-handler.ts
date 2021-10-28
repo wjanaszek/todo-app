@@ -8,7 +8,7 @@ export class DeleteTodoCommandHandler
 {
   constructor(private readonly todoRepository: TodoRepository) {}
 
-  execute(command: DeleteTodoCommand): Promise<void> {
-    return this.todoRepository.delete(command.uid);
+  async execute(command: DeleteTodoCommand): Promise<void> {
+    return this.todoRepository.delete(command.id, command.authorId);
   }
 }

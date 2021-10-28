@@ -41,6 +41,7 @@ export class RestApiAuthController {
 
   @UseGuards(JwtLoginAuthGuard)
   @Post('login')
+  @HttpCode(HttpStatus.OK)
   async login(@Request() req: LoginRequest): Promise<JwtTokenPayload> {
     return this.authApplicationService.getAuthPayload(req.user);
   }
@@ -49,7 +50,7 @@ export class RestApiAuthController {
   @HttpCode(HttpStatus.CREATED)
   async signUp(@Body() dto: SignUpUserDto): Promise<void> {
     return this.commandBus.execute(
-      new SignUpUserCommand(dto.id, dto.email, dto.username, dto.password)
+      new SignUpUserCommand(dto.email, dto.username, dto.password)
     );
   }
 

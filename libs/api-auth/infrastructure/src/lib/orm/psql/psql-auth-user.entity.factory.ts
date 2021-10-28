@@ -9,6 +9,6 @@ define(PsqlAuthUserEntity, (faker: typeof Faker) => {
   const user = new PsqlAuthUserEntity();
   user.username = `${firstName} ${lastName}`;
   user.email = faker.internet.email(firstName, lastName);
-  user.password = 'test';
+  user.password = 'somePassword';
   return user;
 });

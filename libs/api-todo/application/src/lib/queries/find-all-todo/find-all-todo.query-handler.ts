@@ -9,8 +9,8 @@ export class FindAllTodoQueryHandler
 {
   constructor(private readonly todoRepository: TodoRepository) {}
 
-  execute(query: FindAllTodoQuery): Promise<TodoEntity[]> {
+  async execute(query: FindAllTodoQuery): Promise<TodoEntity[]> {
     // @TODO check why repository should not be used for queries
-    return this.todoRepository.findAll();
+    return this.todoRepository.findAll(query.authorId);
   }
 }

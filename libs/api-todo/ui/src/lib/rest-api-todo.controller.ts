@@ -9,14 +9,28 @@ import {
   InternalServerErrorException,
   Param,
   Post,
-  Put
+  Put,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '@wjanaszek/api-auth/application';
 import { TodoApplicationService } from '@wjanaszek/api-todo/application';
 import { TodoId } from '@wjanaszek/api-todo/domain';
-import { CreateTodoDto, TodoDto, UpdateTodoDto } from '@wjanaszek/api-todo/infrastructure';
-import { ApplicationError, ApplicationErrorType } from '@wjanaszek/shared/application';
-import { HttpNotFoundException } from '@wjanaszek/shared/infrastructure';
+import {
+  CreateTodoDto,
+  TodoDto,
+  UpdateTodoDto,
+} from '@wjanaszek/api-todo/infrastructure';
+import {
+  ApplicationError,
+  ApplicationErrorType,
+} from '@wjanaszek/shared/application';
+import {
+  HttpNotFoundException,
+  JwtRequest,
+} from '@wjanaszek/shared/infrastructure';
 
+@UseGuards(JwtAuthGuard)
 @Controller(RestApiTodoController.URI)
 export class RestApiTodoController {
   static readonly URI = 'todos';
@@ -27,9 +41,15 @@ export class RestApiTodoController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async create(@Body() dto: CreateTodoDto): Promise<void> {
+  async create(
+    @Body() dto: CreateTodoDto,
+    @Req() request: JwtRequest
+  ): Promise<void> {
     try {
-      return await this.todoApplicationService.create(dto);
+      return this.todoApplicationService.create({
+        ...dto,
+        authorId: request.user.id,
+      });
     } catch (error) {
       if (
         error instanceof ApplicationError &&
@@ -43,9 +63,12 @@ export class RestApiTodoController {
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: TodoId): Promise<void> {
+  async delete(
+    @Param('id') id: TodoId,
+    @Req() request: JwtRequest
+  ): Promise<void> {
     try {
-      return await this.todoApplicationService.delete(id);
+      return await this.todoApplicationService.delete(id, request.user.id);
     } catch (error) {
       if (
         error instanceof ApplicationError &&
@@ -59,14 +82,17 @@ export class RestApiTodoController {
   }
 
   @Get()
-  findAll(): Promise<TodoDto[]> {
-    return this.todoApplicationService.findAll();
+  findAll(@Req() request: JwtRequest): Promise<TodoDto[]> {
+    return this.todoApplicationService.findAll(request.user.id);
   }
 
   @Get(':id')
-  async findById(@Param('id') id: TodoId): Promise<TodoDto | null> {
+  async findById(
+    @Param('id') id: TodoId,
+    @Req() request: JwtRequest
+  ): Promise<TodoDto | null> {
     try {
-      return await this.todoApplicationService.findById(id);
+      return await this.todoApplicationService.findById(id, request.user.id);
     } catch (error) {
       if (
         error instanceof ApplicationError &&
@@ -83,14 +109,16 @@ export class RestApiTodoController {
    * Update a ToDo
    * @param id entity uuid
    * @param dto
+   * @param request
    */
   @Put(':id')
   async update(
     @Param('id') id: TodoId,
-    @Body() dto: UpdateTodoDto
+    @Body() dto: UpdateTodoDto,
+    @Req() request: JwtRequest
   ): Promise<TodoDto> {
     try {
-      return await this.todoApplicationService.update(id, dto);
+      return await this.todoApplicationService.update(id, request.user.id, dto);
     } catch (error) {
       if (error instanceof ApplicationError) {
         if (error.type === ApplicationErrorType.NOT_FOUND) {
