@@ -1,7 +1,7 @@
 import {
   TodoEntity,
   TodoStatus,
-  TodoUid,
+  TodoId,
   TodoValidation,
 } from '@wjanaszek/api-todo/domain';
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
@@ -9,7 +9,7 @@ import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('todo')
 export class PsqlTodoEntity extends BaseEntity implements TodoEntity {
   @PrimaryGeneratedColumn('uuid')
-  uid: TodoUid;
+  id: TodoId;
 
   @Column({ type: 'varchar', length: TodoValidation.maxLength })
   name: string;

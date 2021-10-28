@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { TodoUid } from '@wjanaszek/api-todo/domain';
+import { TodoId } from '@wjanaszek/api-todo/domain';
 import { CreateTodoCommand } from './commands/create/create-todo.command';
 import { DeleteTodoCommand } from './commands/delete/delete-todo.command';
 import { UpdateTodoCommand } from './commands/update/update-todo.command';
@@ -22,11 +22,11 @@ export class TodoApplicationServiceImplementation
 
   create(data: CreateTodoWriteModel): Promise<void> {
     return this.commandBus.execute(
-      new CreateTodoCommand(data.uid, data.name, data.status)
+      new CreateTodoCommand(data.id, data.name, data.status)
     );
   }
 
-  delete(id: TodoUid): Promise<void> {
+  delete(id: TodoId): Promise<void> {
     return this.commandBus.execute(new DeleteTodoCommand(id));
   }
 
@@ -34,11 +34,11 @@ export class TodoApplicationServiceImplementation
     return this.queryBus.execute(new FindAllTodoQuery());
   }
 
-  findById(id: TodoUid): Promise<TodoReadModel | null> {
+  findById(id: TodoId): Promise<TodoReadModel | null> {
     return this.queryBus.execute(new FindTodoByIdQuery(id));
   }
 
-  update(id: TodoUid, data: UpdateTodoWriteModel): Promise<TodoReadModel> {
+  update(id: TodoId, data: UpdateTodoWriteModel): Promise<TodoReadModel> {
     return this.commandBus.execute(
       new UpdateTodoCommand(id, data.name, data.status)
     );

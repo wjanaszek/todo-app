@@ -12,7 +12,7 @@ import {
   Put
 } from '@nestjs/common';
 import { TodoApplicationService } from '@wjanaszek/api-todo/application';
-import { TodoUid } from '@wjanaszek/api-todo/domain';
+import { TodoId } from '@wjanaszek/api-todo/domain';
 import { CreateTodoDto, TodoDto, UpdateTodoDto } from '@wjanaszek/api-todo/infrastructure';
 import { ApplicationError, ApplicationErrorType } from '@wjanaszek/shared/application';
 import { HttpNotFoundException } from '@wjanaszek/shared/infrastructure';
@@ -43,7 +43,7 @@ export class RestApiTodoController {
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: TodoUid): Promise<void> {
+  async delete(@Param('id') id: TodoId): Promise<void> {
     try {
       return await this.todoApplicationService.delete(id);
     } catch (error) {
@@ -64,7 +64,7 @@ export class RestApiTodoController {
   }
 
   @Get(':id')
-  async findById(@Param('id') id: TodoUid): Promise<TodoDto | null> {
+  async findById(@Param('id') id: TodoId): Promise<TodoDto | null> {
     try {
       return await this.todoApplicationService.findById(id);
     } catch (error) {
@@ -86,7 +86,7 @@ export class RestApiTodoController {
    */
   @Put(':id')
   async update(
-    @Param('id') id: TodoUid,
+    @Param('id') id: TodoId,
     @Body() dto: UpdateTodoDto
   ): Promise<TodoDto> {
     try {

@@ -1,8 +1,8 @@
 import { TodoStatus } from './todo-status.enum';
-import { TodoUid } from './todo.uid';
+import { TodoId } from './todo.id';
 
 export interface TodoEntity {
-  uid: TodoUid;
+  id: TodoId;
   name: string;
   status: TodoStatus;
 }

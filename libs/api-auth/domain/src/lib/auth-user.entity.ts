@@ -1,4 +1,4 @@
-import { AuthUserId } from './auth-user-id';
+import { AuthUserId } from './auth-user.id';
 
 export interface AuthUserEntity {
   id: AuthUserId;

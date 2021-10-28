@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTodoCommand, TodoRepository, UpdateTodoCommand } from '@wjanaszek/api-todo/application';
-import { TodoUid } from '@wjanaszek/api-todo/domain';
+import { TodoEntity, TodoId } from '@wjanaszek/api-todo/domain';
 import { Repository } from 'typeorm';
 import { PsqlTodoEntity } from './psql-todo.entity';
 
@@ -12,11 +12,11 @@ export class PsqlTodoRepository implements TodoRepository {
     private readonly todoRepository: Repository<PsqlTodoEntity>
   ) {}
 
-  async create(data: CreateTodoCommand): Promise<PsqlTodoEntity> {
+  async create(data: CreateTodoCommand): Promise<TodoEntity> {
     return this.todoRepository.create(data);
   }
 
-  async delete(id: TodoUid): Promise<void> {
+  async delete(id: TodoId): Promise<void> {
     const toRemove = await this.findById(id);
 
     return new Promise((resolve, reject) => {
@@ -30,15 +30,15 @@ export class PsqlTodoRepository implements TodoRepository {
     });
   }
 
-  async findAll(): Promise<PsqlTodoEntity[]> {
+  async findAll(): Promise<TodoEntity[]> {
     return this.todoRepository.find();
   }
 
-  async findById(id: TodoUid): Promise<PsqlTodoEntity | undefined> {
+  async findById(id: TodoId): Promise<TodoEntity | undefined> {
     return this.todoRepository.findOne(id);
   }
 
-  async update(data: UpdateTodoCommand): Promise<PsqlTodoEntity> {
+  async update(data: UpdateTodoCommand): Promise<TodoEntity> {
     const toUpdate = await this.findById(data.uid);
 
     return new Promise((resolve, reject) => {

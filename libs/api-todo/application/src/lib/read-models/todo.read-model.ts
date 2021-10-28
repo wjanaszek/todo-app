@@ -1,7 +1,7 @@
-import { TodoStatus, TodoUid } from '@wjanaszek/api-todo/domain';
+import { TodoStatus, TodoId } from '@wjanaszek/api-todo/domain';
 
 export interface TodoReadModel {
-  uid: TodoUid;
+  id: TodoId;
   name: string;
   status: TodoStatus;
 }
