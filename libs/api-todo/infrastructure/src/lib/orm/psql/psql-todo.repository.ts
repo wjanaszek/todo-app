@@ -66,12 +66,14 @@ export class PsqlTodoRepository implements TodoRepository {
   async update(data: UpdateTodoCommand): Promise<TodoEntity> {
     const toUpdate = await this.findById(data.id, data.authorId);
 
-    return new Promise((resolve, reject) => {
-      if (!toUpdate) {
-        reject(data);
-      }
+    if (!toUpdate) {
+      throw new Error(`ToDo ${data.id} not found!`);
+    }
 
-      resolve(this.todoRepository.save({ ...toUpdate, ...data }));
+    return this.todoRepository.save({
+      ...toUpdate,
+      name: data.name ?? toUpdate.name,
+      status: data.status ?? toUpdate.status,
     });
   }
 }

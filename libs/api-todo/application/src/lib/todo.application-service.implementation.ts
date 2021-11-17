@@ -44,10 +44,15 @@ export class TodoApplicationServiceImplementation
   async update(
     id: TodoId,
     authorId: TodoAuthorId,
-    data: UpdateTodoWriteModel
+    data: Partial<UpdateTodoWriteModel>
   ): Promise<TodoReadModel> {
     return this.commandBus.execute(
-      new UpdateTodoCommand(id, data.name, data.status, authorId)
+      new UpdateTodoCommand(
+        id,
+        data.name || null,
+        data.status || null,
+        authorId
+      )
     );
   }
 }

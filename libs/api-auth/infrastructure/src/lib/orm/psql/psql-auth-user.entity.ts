@@ -15,24 +15,24 @@ import {
 @Entity('authUser')
 export class PsqlAuthUserEntity extends BaseEntity implements AuthUserEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: AuthUserId;
+  id!: AuthUserId;
 
   @Column({
     type: 'varchar',
     length: AuthUserValidation.email.maxLength,
     unique: true,
   })
-  email: string;
+  email!: string;
 
   @Column({
     type: 'varchar',
     length: AuthUserValidation.username.maxLength,
     unique: true,
   })
-  username: string;
+  username!: string;
 
   @Column({ type: 'varchar' })
-  password: string;
+  password!: string;
 
   @BeforeInsert()
   async hashPassword(password: string): Promise<void> {
