@@ -1,17 +1,29 @@
-import { TodoAuthorEntity, TodoEntity, TodoId, TodoStatus, TodoValidation } from '@wjanaszek/api-todo/domain';
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  TodoAuthorEntity,
+  TodoEntity,
+  TodoId,
+  TodoStatus,
+  TodoValidation,
+} from '@wjanaszek/api-todo/domain';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { PsqlTodoAuthorEntity } from './psql-todo-author.entity';
 
 @Entity('todo')
 export class PsqlTodoEntity extends BaseEntity implements TodoEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: TodoId;
+  id!: TodoId;
 
   @Column({ type: 'varchar', length: TodoValidation.maxLength })
-  name: string;
+  name!: string;
 
   @Column('enum', { enum: TodoStatus })
-  status: TodoStatus;
+  status!: TodoStatus;
 
   @ManyToOne(
     () => PsqlTodoAuthorEntity,
@@ -20,5 +32,5 @@ export class PsqlTodoEntity extends BaseEntity implements TodoEntity {
       nullable: false,
     }
   )
-  author: TodoAuthorEntity;
+  author!: TodoAuthorEntity;
 }

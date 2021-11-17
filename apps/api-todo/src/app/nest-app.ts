@@ -1,15 +1,20 @@
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerDocumentOptions, SwaggerModule } from '@nestjs/swagger';
 
 export const globalRoutePrefix = 'api';
 
 export function appendGlobalSettingsToNestApp(app: INestApplication): void {
   setupPrefix(app);
+  setupPipes(app);
   setupSwagger(app);
 }
 
 function setupPrefix(app: INestApplication): void {
   app.setGlobalPrefix(globalRoutePrefix);
+}
+
+function setupPipes(app: INestApplication): void {
+  app.useGlobalPipes(new ValidationPipe());
 }
 
 function setupSwagger(app: INestApplication): void {

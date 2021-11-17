@@ -1,7 +1,16 @@
 import { TodoStatus, TodoId } from '@wjanaszek/api-todo/domain';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateTodoDto {
-  id: TodoId;
-  name: string;
-  status: TodoStatus;
+  @IsString()
+  @IsNotEmpty()
+  id!: TodoId;
+
+  @IsString()
+  @IsNotEmpty()
+  name!: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  status!: TodoStatus;
 }

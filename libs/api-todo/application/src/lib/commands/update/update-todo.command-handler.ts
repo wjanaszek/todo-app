@@ -14,18 +14,14 @@ export class UpdateTodoCommandHandler
   constructor(private readonly todoRepository: TodoRepository) {}
 
   async execute(command: UpdateTodoCommand): Promise<TodoEntity> {
-    return new Promise((resolve, reject) => {
-      if (command.name.length > TodoValidation.maxLength) {
-        reject(
-          new ApplicationError()
-            .withType(ApplicationErrorType.VALIDATION)
-            .withMessage(
-              `Max length for name field is ${TodoValidation.maxLength}`
-            )
+    if (command.name && command.name?.length > TodoValidation.maxLength) {
+      throw new ApplicationError()
+        .withType(ApplicationErrorType.VALIDATION)
+        .withMessage(
+          `Max length for name field is ${TodoValidation.maxLength}`
         );
-      }
+    }
 
-      resolve(this.todoRepository.update(command));
-    });
+    return this.todoRepository.update(command);
   }
 }
