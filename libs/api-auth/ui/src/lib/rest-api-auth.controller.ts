@@ -1,9 +1,10 @@
 import {
   Body,
   Controller,
-  Get,
+  Delete,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
   Request,
   UseGuards,
@@ -15,6 +16,7 @@ import {
   JwtAuthUser,
   JwtLoginAuthGuard,
   JwtTokenPayload,
+  RemoveUserCommand,
   ResetPasswordCommand,
   ResetPasswordResult,
   SetPasswordCommand,
@@ -46,12 +48,13 @@ export class RestApiAuthController {
     return this.authApplicationService.getAuthPayload(req.user);
   }
 
-  @Post('signUp')
-  @HttpCode(HttpStatus.CREATED)
-  async signUp(@Body() dto: SignUpUserDto): Promise<void> {
-    return this.commandBus.execute(
-      new SignUpUserCommand(dto.email, dto.username, dto.password)
-    );
+  @UseGuards(JwtAuthGuard)
+  @Delete('user/:usernameOrEmail')
+  @HttpCode(HttpStatus.OK)
+  async removeUser(
+    @Param('usernameOrEmail') usernameOrEmail: string
+  ): Promise<void> {
+    return this.commandBus.execute(new RemoveUserCommand(usernameOrEmail));
   }
 
   @Post('resetPassword')
@@ -68,9 +71,11 @@ export class RestApiAuthController {
     );
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  async test() {
-    return { test: true };
+  @Post('signUp')
+  @HttpCode(HttpStatus.CREATED)
+  async signUp(@Body() dto: SignUpUserDto): Promise<void> {
+    return this.commandBus.execute(
+      new SignUpUserCommand(dto.email, dto.username, dto.password)
+    );
   }
 }

@@ -16,7 +16,7 @@ export const getFixtures = async () => {
 
   return {
     cleanup: async (): Promise<void> => {
-      await repository.remove(credentials.email);
+      await repository.removeByEmailOrUsername(credentials.email);
       await app.close();
     },
     GivenCreatedUser: async (): Promise<void> => {

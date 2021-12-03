@@ -4,7 +4,7 @@ import { Response } from 'express';
 
 @Catch(AuthUserSignUpValidationException)
 export class AuthUserSignUpValidationExceptionHandler
-  implements ExceptionFilter
+  implements ExceptionFilter<AuthUserSignUpValidationException>
 {
   catch(
     exception: AuthUserSignUpValidationException,

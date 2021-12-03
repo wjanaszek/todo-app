@@ -23,7 +23,7 @@ export class ResetPasswordCommandHandler
   ) {}
 
   async execute(command: ResetPasswordCommand): Promise<ResetPasswordResult> {
-    const user = await this.authUserRepository.findByEmail(command.userEmail);
+    const user = await this.authUserRepository.findByEmailOrUsername(command.userEmail);
 
     if (!user) {
       // this is just to stop processing this command

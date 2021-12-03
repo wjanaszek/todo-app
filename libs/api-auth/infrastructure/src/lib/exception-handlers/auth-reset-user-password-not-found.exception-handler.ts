@@ -12,7 +12,7 @@ import { Response } from 'express';
 
 @Catch(AuthResetUserPasswordNotFoundException)
 export class AuthResetUserPasswordNotFoundExceptionHandler
-  implements ExceptionFilter
+  implements ExceptionFilter<AuthResetUserPasswordNotFoundException>
 {
   catch(
     exception: AuthResetUserPasswordNotFoundException,

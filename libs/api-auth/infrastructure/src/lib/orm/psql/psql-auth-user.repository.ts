@@ -17,11 +17,15 @@ export class PsqlAuthUserRepository implements AuthUserRepository {
     private readonly authUserRepository: Repository<PsqlAuthUserEntity>
   ) {}
 
-  async findByEmail(email: string): Promise<AuthUserEntity | undefined> {
-    return this.authUserRepository.findOne({ where: { email } });
+  async findByEmailOrUsername(
+    emailOrUsername: string
+  ): Promise<AuthUserEntity | undefined> {
+    return this.authUserRepository.findOne({
+      where: [{ username: emailOrUsername }, { email: emailOrUsername }],
+    });
   }
 
-  async remove(usernameOrEmail: string): Promise<void> {
+  async removeByEmailOrUsername(usernameOrEmail: string): Promise<void> {
     const toDelete = await this.authUserRepository.findOne({
       where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     });
