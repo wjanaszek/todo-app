@@ -14,7 +14,11 @@
   * reset password flow (with sending an email)
   * connection of AuthUser with ToDoAuthor by events (i.e. creating the AuthUser causes creating a duplicate ToDoAuthor record in ToDo domain)
 
-Missing:
+#### Test user:
+* username: test
+* password: test
+
+#### Missing:
 * soft and hard delete of a user
 * roles and groups for users
 * ToDo author with profile image (uploading files)

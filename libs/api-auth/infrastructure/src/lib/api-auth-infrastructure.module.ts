@@ -9,6 +9,7 @@ import {
 import { CredentialsAuthUsersApplicationService } from './credentials/credentials-auth-users.application-service';
 import { AuthResetUserPasswordNotFoundExceptionHandler } from './exception-handlers/auth-reset-user-password-not-found.exception-handler';
 import { AuthUserNotFoundExceptionHandler } from './exception-handlers/auth-user-not-found.exception-handler';
+import { AuthUserNotRemovedExceptionHandler } from './exception-handlers/auth-user-not-removed.exception-handler';
 import { AuthUserSignUpValidationExceptionHandler } from './exception-handlers/auth-user-sign-up-validation.exception-handler';
 import { AuthWrongPasswordExceptionHandler } from './exception-handlers/auth-wrong-password.exception-handler';
 import { JwtAuthUsersApplicationService } from './jwt/application/jwt-auth-users.application-service';
@@ -26,6 +27,10 @@ import { PsqlAuthUserRepository } from './orm/psql/psql-auth-user.repository';
     {
       provide: APP_FILTER,
       useClass: AuthUserNotFoundExceptionHandler,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: AuthUserNotRemovedExceptionHandler,
     },
     {
       provide: APP_FILTER,

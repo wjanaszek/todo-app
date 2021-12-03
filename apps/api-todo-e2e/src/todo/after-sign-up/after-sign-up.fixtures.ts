@@ -35,7 +35,7 @@ export const getFixtures = async () => {
 
   return {
     cleanup: async () => {
-      await userRepository.remove(credentials.email);
+      await userRepository.removeByEmailOrUsername(credentials.email);
       await todoRepository.delete(todo.id, userId);
       await app.close();
     },

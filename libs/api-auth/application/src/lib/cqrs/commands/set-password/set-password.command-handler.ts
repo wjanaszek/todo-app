@@ -44,7 +44,7 @@ export class SetPasswordCommandHandler
   }
 
   private async isUserNotAvailable(user: AuthUserEntity): Promise<boolean> {
-    const existingUser = await this.authUserRepository.findByEmail(user.email);
+    const existingUser = await this.authUserRepository.findByEmailOrUsername(user.email);
 
     return !!existingUser;
   }

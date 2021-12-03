@@ -3,6 +3,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { CreateTodoCommandHandler } from './commands/create/create-todo.command-handler';
 import { DeleteTodoCommandHandler } from './commands/delete/delete-todo.command-handler';
 import { UpdateTodoCommandHandler } from './commands/update/update-todo.command-handler';
+import { UserRemovedEventHandler } from './events/user-removed.event-handler';
 import { UserSignedUpEventHandler } from './events/user-signed-up.event-handler';
 import { FindAllTodoQueryHandler } from './queries/find-all-todo/find-all-todo.query-handler';
 import { FindTodoByIdQueryHandler } from './queries/find-todo-by-id/find-todo-by-id.query-handler';
@@ -14,7 +15,7 @@ const CommandHandlers = [
   DeleteTodoCommandHandler,
   UpdateTodoCommandHandler,
 ];
-const EventHandlers = [UserSignedUpEventHandler];
+const EventHandlers = [UserRemovedEventHandler, UserSignedUpEventHandler];
 const QueryHandlers = [FindAllTodoQueryHandler, FindTodoByIdQueryHandler];
 
 @Module({

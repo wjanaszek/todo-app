@@ -3,8 +3,8 @@ import {
   TodoAuthorId,
   TodoEntity,
 } from '@wjanaszek/api-todo/domain';
-import { PsqlTodoEntity } from './psql-todo.entity';
 import { BaseEntity, Column, Entity, OneToMany } from 'typeorm';
+import { PsqlTodoEntity } from './psql-todo.entity';
 
 @Entity('todoAuthor')
 export class PsqlTodoAuthorEntity
@@ -14,8 +14,6 @@ export class PsqlTodoAuthorEntity
   @Column({ type: 'varchar', unique: true, primary: true })
   id!: TodoAuthorId;
 
-  @OneToMany(() => PsqlTodoEntity, (todo: PsqlTodoEntity) => todo.author, {
-    onDelete: 'CASCADE',
-  })
+  @OneToMany(() => PsqlTodoEntity, (todo: PsqlTodoEntity) => todo.author)
   todos!: TodoEntity[];
 }
